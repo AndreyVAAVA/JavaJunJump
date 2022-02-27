@@ -1,24 +1,37 @@
 package com.company;
 
 public class ListObject {
-    private int prev;
-    private int next;
+    private ListObject prev;
+    private ListObject next;
+    private int value;
 
+    public ListObject(ListObject prev, ListObject next, int value) {
+        this.prev = prev;
+        this.next = next;
+        this.value = value;
+    }
 
-
-    public int getPrev() {
+    public ListObject getPrev() {
         return prev;
     }
 
-    public void setPrev(int prev) {
+    public void setPrev(ListObject prev) {
         this.prev = prev;
     }
 
-    public int getNext() {
+    public ListObject getNext() {
         return next;
     }
 
-    public void setNext(int next) {
+    public void setNext(ListObject next) {
         this.next = next;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }
