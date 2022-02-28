@@ -32,7 +32,7 @@ public class Main {
                 writer.write("");
         }
         writer.close();*/
-        ForwardList list = new ForwardList();
+        /*ForwardList list = new ForwardList();
         list.add(10, 0);
         list.add(20, 1);
         list.add(15, 2);
@@ -47,7 +47,28 @@ public class Main {
         list.addToHead(96);
         for (int i = 0; i < 4; i++) {
             System.out.println(list.get(i));
+        }*/
+        DynamicArray array = new DynamicArray();
+        array.add(10, 0);
+        array.add(10, 0);
+        array.add(10, 0);
+        array.add(20, 1);
+        /*for (int i = 0; i < 3; i++) {
+            System.out.println(array.get(i));
+        }*/
+        array.remove(2);
+        array.remove(0);
+        /*for (int i = 0; i < 3; i++) {
+            System.out.println(array.get(i));
+        }*/
+        array.addToEnd(555);
+        array.addToEnd(666);
+        /*for (int i = 0; i < 4; i++) {
+            System.out.println(array.get(i));
+        }*/
+        array.removeFromEnd();
+        for (int i = 0; i < 3; i++) {
+            System.out.println(array.get(i));
         }
-
     }
 }

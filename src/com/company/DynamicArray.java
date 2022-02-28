@@ -4,34 +4,38 @@ public class DynamicArray {
     int currArrSize = 1;
     int amountOfObjects = 0;
     int currSize = 0;
-    int[] arr = new int[currSize];
+    int[] arr = new int[currArrSize];
 
     public void add(int value, int index) {
+        int[] newArr = new int[arr.length];
         if (currSize == amountOfObjects) {
-            resize(currArrSize * 2);
+            newArr = new int[currArrSize * 2];
             currArrSize *= 2;
         }
-        int[] newArr = new int[arr.length - 1];
-        if (index >= 0) System.arraycopy(arr, 0, newArr, 0, index);
-        newArr[index] = value;
-        if (arr.length - 1 - index >= 0) System.arraycopy(arr, index, newArr, index + 1, arr.length - 1 - index);
+        if (index == 0) {
+            newArr[0] = value;
+            System.arraycopy(arr, 0, newArr, 1, arr.length);
+        } else {
+            if (index >= 0) System.arraycopy(arr, 0, newArr, 0, index);
+            newArr[index] = value;
+            if (arr.length - index >= 0) System.arraycopy(arr, index, newArr, index + 1, arr.length - index);
+        }
         currSize++;
+        amountOfObjects++;
         arr = newArr;
     }
 
     public void remove(int index) {
-        for (int i = 0; i < arr.length - 1; i++) {
-            if (arr[i] == index) {
-                int[] newArr = new int[arr.length - 1];
-                System.arraycopy(arr, 0, newArr, 0, i);
-                if (arr.length - 1 - i >= 0) System.arraycopy(arr, i + 1, newArr, i, arr.length - 1 - i);
-                arr = newArr;
-                break;
-            }
-        }
+        int[] newArr = new int[arr.length];
+        if (index >= 0) System.arraycopy(arr, 0, newArr, 0, index);
+        if (arr.length - (index + 1) >= 0)
+            System.arraycopy(arr, index + 1, newArr, index + 1 - 1, arr.length - (index + 1));
+        arr = newArr;
+        amountOfObjects--;
     }
 
     public int get(int index) {
+        if (index + 1 > amountOfObjects) throw new IndexOutOfBoundsException();
         return arr[index];
     }
 
@@ -54,11 +58,13 @@ public class DynamicArray {
             resize(currArrSize * 2);
             currArrSize *= 2;
         }
-        arr[currSize++] = value;
+        currSize++;
+        arr[amountOfObjects++] = value;
     }
 
     public void removeFromEnd() {
-        arr[arr.length - 1] = 0;
+        arr[--amountOfObjects] = 0;
+        currSize--;
     }
 
 }
